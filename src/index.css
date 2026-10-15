@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/*
+  Restaurant Management System — premium classic identity.
+  Tailwind v4 CSS-first theme.
+
+  Brand rule (from the spec):
+    Primary  Dark Green  #02462E   → anchors at brand-700
+    Accent   Golden Yellow #FEC700  → anchors at gold-400
+    Surfaces Cream / White, ink #17211D, muted #6B7280, line #E5E7EB
+  Yellow is an accent, never a full background. No dark/light mode toggle.
+*/
+@theme {
+  /* Typography — Playfair Display for elegant headings, DM Sans for UI/body */
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, Cambria,
+    "Times New Roman", serif;
+
+  /* Primary — deep forest green (#02462E anchored at 700) */
+  --color-brand-50: #eef5f1;
+  --color-brand-100: #d6e8dd;
+  --color-brand-200: #a9cfb9;
+  --color-brand-300: #76b192;
+  --color-brand-400: #45936c;
+  --color-brand-500: #1f7a4f;
+  --color-brand-600: #0d6540;
+  --color-brand-700: #02462e;
+  --color-brand-800: #023625;
+  --color-brand-900: #022a1d;
+  --color-brand-950: #011810;
+
+  /* Accent — golden yellow (#FEC700 anchored at 400) */
+  --color-gold-50: #fffbea;
+  --color-gold-100: #fff6c2;
+  --color-gold-200: #ffec8a;
+  --color-gold-300: #ffd84d;
+  --color-gold-400: #fec700;
+  --color-gold-500: #e3af00;
+  --color-gold-600: #c18700;
+  --color-gold-700: #966500;
+
+  /* Supporting neutrals / surfaces */
+  --color-canvas: #fffdf5;   /* page background (cream) */
+  --color-cream: #fffdf5;
+  --color-cream-soft: #fff9e6;
+  --color-ink: #17211d;      /* primary dark text */
+  --color-muted: #6b7280;    /* secondary text */
+  --color-line: #e5e7eb;     /* hairline borders */
+  --color-shell: #f8faf9;    /* dashboard background */
+
+  /* Semantic */
+  --color-success: #16803c;
+  --color-danger: #dc2626;
+  --color-warning: #f59e0b;
+
+  --radius-4xl: 1.75rem;
+
+  /* Motion (transform / opacity only — GPU friendly) */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.5s ease both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-slide-in-right: slide-in-right 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-slide-up: slide-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-marquee: marquee 26s linear infinite;
+  --animate-kenburns: kenburns 18s ease-out both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-draw: draw 0.6s ease-out both;
+  --animate-cart-bounce: cart-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slide-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(2, 70, 46, 0.45); }
+  50% { box-shadow: 0 0 0 7px rgba(2, 70, 46, 0); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes kenburns {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cart-bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25); }
+  60% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+    letter-spacing: -0.01em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-700);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-gold-300);
+    color: var(--color-brand-900);
+  }
+}
+
+/* Thin, warm scrollbar */
+.scrollbar-warm {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand-200) transparent;
+}
+.scrollbar-warm::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-warm::-webkit-scrollbar-thumb {
+  background: var(--color-brand-200);
+  border-radius: 9999px;
+}
+.scrollbar-warm::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Skeleton shimmer helper */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-50) 25%,
+    var(--color-cream-soft) 37%,
+    var(--color-brand-50) 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* Respect users who disable animations (spec §35) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
